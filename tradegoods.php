@@ -24,7 +24,21 @@ include_once "sidenav.php";
 	<div class="container">
 		<div class="page-header">
 			<h1> Trade Goods</h1>
-            <p>Create filter dropdown</p>
+            <p>Filter by Profession</p>
+			<?php
+			include "config/database.php";
+			$queryProf = "SELECT professionID, profession FROM item";
+			$stmtProf= $con->prepare($queryProf);
+			$stmtProf->execute();
+			
+			echo "<select class='form-control' name='profession_id'>";
+			echo "<option>Select Filter </option>";
+			while ($row_profession = $stmtProf->fetch(PDO::FETCH_ASSOC)){
+				extract($row_profession);
+				echo "<option value='{$professionID}'>{$profession}</option>";
+			}
+			echo "</select>";
+			?>
 		</div>
 		<?PHP
 		
@@ -100,23 +114,7 @@ include_once "sidenav.php";
 	<script src="libs/jquery-3.0.0.min.js"></script>
 	<script src="libs/bootstrap-3.3.6/js/bootstrap.min.js"></script>
 	
-	<script type="text/javascript">
-		
-		function delete_user(id)
-		{
-			var answer = confirm("Are you sure?");
-			if(answer)
-			   {
-			   	// if user clicked ok, 
-				// pass the id to delete.php and execute the delete query 
-				   
-				   window.location = "delete.php?id="+id;
-			   }
-			
-		}
 	
-	
-	</script>
 	
 </body>
 </html>
