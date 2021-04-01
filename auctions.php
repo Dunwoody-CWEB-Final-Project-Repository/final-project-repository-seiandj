@@ -55,7 +55,7 @@ include_once "sidenav.php";
 			echo"<th>Item</th>";
 			echo"<th>Quantity</th>";
 			echo"<th>Price</th>";	
-			echo"<th>User</th>";
+			echo"<th>Owner</th>";
 			echo"<th>Action</th>";
       		echo"</tr>";
 			
