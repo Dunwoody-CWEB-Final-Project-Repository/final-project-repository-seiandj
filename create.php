@@ -41,7 +41,7 @@ include_once "sidenav.php";
 
 				// bind the parameters
 				$stmt->bindParam(':userID', $userID);
-				$stmt->bindParam(':itemID', $quantity);
+				$stmt->bindParam(':itemID', $itemID);
 				$stmt->bindParam(':quantity', $quantity);
                 //$stmt->bindParam(':value', $value);
 				

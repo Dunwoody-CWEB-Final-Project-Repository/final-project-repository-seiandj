@@ -45,6 +45,7 @@ include_once "sidenav.php";
 		include "config/database.php";
 		
 		
+
 		$action=isset($_GET["action"]) ? $_GET["action"] : " ";
 		if($action =="deleted")
 		{
@@ -64,9 +65,9 @@ include_once "sidenav.php";
 		
 		if ($num>0)
 		{
-			//start table
+			
 			echo"<table class='table table-hover table-responsive table-bordered'";
-			//  table heading
+			
 			echo"<tr>";
 			echo"<th>Name</th>";	
 			echo"<th>Price</th>";
@@ -76,7 +77,7 @@ include_once "sidenav.php";
 			// retrieve  table contents
 			while($row=$stmt->fetch(PDO::FETCH_ASSOC))
 			{
-				// extract row
+				
 				extract($row);
 				
 				echo"<tr>";
@@ -95,7 +96,7 @@ include_once "sidenav.php";
 		else
 		{
 			echo"<table class='table table-hover table-responsive table-bordered'";
-			//  table heading
+			
 			echo"<tr>";
 			echo"<th>Name</th>";	
 			echo"<th>Price</th>";

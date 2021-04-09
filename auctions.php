@@ -24,7 +24,7 @@ include_once "sidenav.php";
 			<h1> Auctions </h1>
 		</div>
 		<?PHP
-		// include database connection
+		
 		include "config/database.php";
 		
 		
@@ -41,16 +41,16 @@ include_once "sidenav.php";
 		$stmt->execute();
 		
 		
-		// this is how to get number of rows returned
+		
 		$num=$stmt->rowCount();
-		//link to create record form
+		
 		echo'<a href="create.php" class="btn btn-primary m-b-1em">Create Auction</a>';
 		
 		if ($num>0)
 		{
 			//start table
 			echo"<table class='table table-hover table-responsive table-bordered'";
-			//creating  table heading
+			
 			echo"<tr>";
 			echo"<th>Item</th>";
 			echo"<th>Quantity</th>";
@@ -59,11 +59,11 @@ include_once "sidenav.php";
 			echo"<th>Action</th>";
       		echo"</tr>";
 			
-			// retrieve  table contents
-			//The Scope Resolution Operator (also called Paamayim Nekudotayim) or in simpler terms, the double colon, is a token that allows access to static, constant, and overridden properties or methods of a class.
+			
+			
 			while($row=$stmt->fetch(PDO::FETCH_ASSOC))
 			{
-				// extract row
+				
 				extract($row);
 				$value = $price * $quantity;
 
@@ -89,7 +89,7 @@ include_once "sidenav.php";
 		else
 		{
 			
-			echo"<div> No records found.  </div> ";
+			echo"<div> No Auctions found.  </div> ";
 		}
 		
 		
@@ -103,7 +103,7 @@ include_once "sidenav.php";
 	
 	<script type="text/javascript">
 		
-		function delete_user(id)
+		function delete_user(auctionID)
 		{
 			var answer = confirm("Are you sure?");
 			if(answer)
@@ -111,7 +111,7 @@ include_once "sidenav.php";
 			   	// if user clicked ok, 
 				// pass the id to delete.php and execute the delete query 
 				   
-				   window.location = "delete.php?id="+id;
+				   window.location = "delete.php?id="+auctionID;
 			   }
 			
 		}
