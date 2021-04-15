@@ -103,7 +103,7 @@ include_once "sidenav.php";
 	
 	<script type="text/javascript">
 		
-		function delete_user(auctionID)
+		function delete_user(id)
 		{
 			var answer = confirm("Are you sure?");
 			if(answer)
@@ -111,7 +111,7 @@ include_once "sidenav.php";
 			   	// if user clicked ok, 
 				// pass the id to delete.php and execute the delete query 
 				   
-				   window.location = "delete.php?id="+auctionID;
+				   window.location = "delete.php?id="+id;
 			   }
 			
 		}
