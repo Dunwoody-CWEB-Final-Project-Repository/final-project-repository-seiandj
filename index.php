@@ -22,7 +22,7 @@
                         </div>
                         <button type="submit" class="form-button button-l margin-b"  >Sign In</button>
                         <p class="text-whitesmoke text-center"><small>Do not have an account?</small></p>
-                        <a class="text-darkyellow" href="#"><small>Create Account</small></a>
+                        <a class="text-darkyellow" href="signup.php"><small>Create Account</small></a>
                 
                     </form>
                     <a href="tradegoods.php" style="color:white;" >Trade Goods TEMPORARY LINK</a>

@@ -24,10 +24,10 @@ include_once "sidenav.php";
 	<div class="container">
 		<div class="page-header">
 			<h1> Trade Goods</h1>
-            <p>Filter by Profession</p>
+			<p>Filter by Profession</p>
 			<?php
 			include "config/database.php";
-			$queryProf = "SELECT professionID, profession FROM item";
+			$queryProf = "SELECT DISTINCT professionID, profession FROM item";
 			$stmtProf= $con->prepare($queryProf);
 			$stmtProf->execute();
 			
@@ -38,7 +38,8 @@ include_once "sidenav.php";
 				echo "<option value='{$professionID}'>{$profession}</option>";
 			}
 			echo "</select>";
-			?>
+			?> 
+			
 		</div>
 		<?PHP
 		
@@ -119,11 +120,3 @@ include_once "sidenav.php";
 	
 </body>
 </html>
-
-
-
-
-
-
-
-
