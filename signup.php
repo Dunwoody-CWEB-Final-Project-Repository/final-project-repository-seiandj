@@ -1,13 +1,11 @@
 <?php
 //Database Configuration File
-include( 'config.php' );
+include( 'config/database.php' );
 //error_reporting(0);
 if ( isset( $_POST[ 'signup' ] ) ) {
   //Getting Post Values
-  $fullname = $_POST[ 'fname' ];
   $username = $_POST[ 'username' ];
   $email = $_POST[ 'email' ];
-  $mobile = $_POST[ 'mobilenumber' ];
 
   //Password hashing
   $password = $_POST[ 'password' ];
@@ -15,28 +13,26 @@ if ( isset( $_POST[ 'signup' ] ) ) {
   $hashedpass = password_hash( $password, PASSWORD_BCRYPT, $options );
 
   // Query for validation of username and email-id
-  $ret = "SELECT * FROM userdata where (UserName=:uname ||  UserEmail=:uemail)";
-  $queryt = $dbh->prepare( $ret );
+  $ret = "SELECT * FROM user where (username=:uname ||  email=:uemail)";
+  $queryt = $con->prepare( $ret );
   $queryt->bindParam( ':uemail', $email, PDO::PARAM_STR );
   $queryt->bindParam( ':uname', $username, PDO::PARAM_STR );
   $queryt->execute();
   $results = $queryt->fetchAll( PDO::FETCH_OBJ );
   if ( $queryt->rowCount() == 0 ) {
     // Query for Insertion
-    $sql = "INSERT INTO userdata(FullName,UserName,UserEmail,UserMobileNumber,LoginPassword) VALUES(:fname,:uname,:uemail,:umobile,:upassword)";
-    $query = $dbh->prepare( $sql );
+    $sql = "INSERT INTO user(username,email,password) VALUES(:uname,:uemail,:upassword)";
+    $query = $con->prepare( $sql );
     // Binding Post Values
-    $query->bindParam( ':fname', $fullname, PDO::PARAM_STR );
     $query->bindParam( ':uname', $username, PDO::PARAM_STR );
     $query->bindParam( ':uemail', $email, PDO::PARAM_STR );
-    $query->bindParam( ':umobile', $mobile, PDO::PARAM_INT );
     $query->bindParam( ':upassword', $hashedpass, PDO::PARAM_STR );
     $query->execute();
-    $lastInsertId = $dbh->lastInsertId();
+    $lastInsertId = $con->lastInsertId();
     if ( $lastInsertId ) {
-      $msg = "You have signup  Scuccessfully";
+      $msg = "Sign up successful";
     } else {
-      $error = "Something went wrong.Please try again";
+      $error = "Something went wrong. Please try again";
     }
   } else {
     $error = "Username or Email-id already exist. Please try again";
@@ -125,14 +121,7 @@ error:function (){
     <?php if($msg){ ?>
     <div class="succWrap"> <strong>Well Done </strong> : <?php echo htmlentities($msg);?></div>
     <?php } ?>
-    <div class="control-group"> 
-      <!-- Full name -->
-      <label class="control-label"  for="fullname">Full Name</label>
-      <div class="controls">
-        <input type="text" id="fname" name="fname"  pattern="[a-zA-Z\s]+" title="Full name must contain letters only" class="input-xlarge" required>
-        <p class="help-block">Full can contain any letters only</p>
-      </div>
-    </div>
+    
     <div class="control-group"> 
       <!-- Username -->
       <label class="control-label"  for="username">Username</label>
@@ -151,14 +140,7 @@ error:function (){
         <p class="help-block">Please provide your E-mail</p>
       </div>
     </div>
-    <div class="control-group"> 
-      <!-- Mobile Number -->
-      <label class="control-label" for="mobilenumber">Mobile Number </label>
-      <div class="controls">
-        <input type="text" id="mobilenumber" name="mobilenumber" pattern="[0-9]{10}" maxlength="10"  title="10 numeric digits only"   class="input-xlarge" required>
-        <p class="help-block">Mobile Number Contain only 10 digit numeric values</p>
-      </div>
-    </div>
+    
     <div class="control-group"> 
       <!-- Password-->
       <label class="control-label" for="password">Password</label>

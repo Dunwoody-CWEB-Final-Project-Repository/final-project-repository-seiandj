@@ -1,6 +1,13 @@
 <?php
+session_start();
+include( 'config/database.php' );
 include_once "sidenav.php";
-?>
+if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
+  header( 'location:auctions.php' );
+} else {
+  ?>
+
+
 <!doctype html>
 <html>
 <head>
@@ -121,11 +128,4 @@ include_once "sidenav.php";
 	
 </body>
 </html>
-
-
-
-
-
-
-
-
+<?php }?>

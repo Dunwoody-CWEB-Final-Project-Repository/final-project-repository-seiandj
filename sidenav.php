@@ -102,6 +102,11 @@
         <i class="fa fa-tachometer" aria-hidden="true"></i> View Auctions
       </a>
     </li>
+    <li>
+      <a href="logout.php">
+        <i class="fa fa-tachometer" aria-hidden="true"></i> Logout
+      </a>
+    </li>
     
   </ul>
 </div>

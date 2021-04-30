@@ -1,6 +1,14 @@
 <?php
+session_start();
+include( 'config/database.php' );
 include_once "sidenav.php";
-?>
+if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
+  header( 'location:auctions.php' );
+} else {
+  ?>
+
+
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -26,8 +34,18 @@ include_once "sidenav.php";
 			// include database connection
 			include 'config/database.php';
 
-			try{
+			
+        	// Code for fecthing user full name on the bassis of username or email.
+        	//$username = $_SESSION[ 'userlogin' ];
+        	//$query = $dbh->prepare( "SELECT  FullName FROM userdata WHERE (UserName=:username || UserEmail=:username)" );
+        	//$query->execute( array( ':username' => $username ) );
+        	//while ( $row = $query->fetch( PDO::FETCH_ASSOC ) ) {
+          	//	$username = $row[ 'FullName' ];
+			//}
+        
 
+			try{
+				
 				// insert query
 				$query = "INSERT INTO auction SET userID=:userID, itemID=:itemID, quantity=:quantity";
 
@@ -118,3 +136,4 @@ include_once "sidenav.php";
 
 </body>
 </html>
+<?php }?>
