@@ -2,11 +2,11 @@
 // used to connect to the database
 $host = "localhost";
 $db_name = "ShadowlandsAuctioneer";
-$username = "root";
+$db = "root";
 $password = "";
 
 try {
-	$con = new PDO("mysql:host={$host};dbname={$db_name}", $username, $password);
+	$con = new PDO("mysql:host={$host};dbname={$db_name}", $db, $password);
 }
 
 // to handle connection error

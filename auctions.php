@@ -43,7 +43,7 @@ if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
 		}
 		
 		// select all data
-		$query="SELECT a.auctionID,a.userID,a.itemID,a.quantity, a.value, u.username, i.name,i.price FROM auction a LEFT JOIN user u ON a.userID = u.userID LEFT JOIN item i ON a.itemID=i.itemID ORDER by auctionID DESC ";
+		$query="SELECT a.auctionID,a.owner,a.itemID,a.quantity, a.value, i.name,i.price FROM auction a  LEFT JOIN item i ON a.itemID=i.itemID ORDER by auctionID DESC ";
 		$stmt=$con->prepare($query);
 		$stmt->execute();
 		
@@ -78,7 +78,7 @@ if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
         		echo"<td>{$name}</td>";
         		echo"<td>{$quantity}</td>";
         		echo"<td>{$value}g</td>";
-				echo"<td>{$username}</td>";
+				echo"<td>{$owner}</td>";
 				echo"<td>";
 				//echo"<a href='read.php?id={$auctionID}' class='btn btn-primary m-r-1em'>Read</a>";
 				echo"<a href='update.php?id={$auctionID}' class='btn btn-warning m-r-1em'>Edit</a>";

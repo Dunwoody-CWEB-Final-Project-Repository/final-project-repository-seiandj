@@ -70,8 +70,7 @@ echo "<script>alert('User not registered with us');</script>";
                         <a class="text-darkyellow" href="signup.php"><small>Create Account</small></a>
                 
                     </form>
-                    <a href="tradegoods.php" style="color:white;" >Trade Goods TEMPORARY LINK</a>
-                    <!--<p class="margin-t text-whitesmoke"><small> Andrew Seigworth &copy; 2021</small> </p> -->
+                    
                 </div>
             </div>
 </body>

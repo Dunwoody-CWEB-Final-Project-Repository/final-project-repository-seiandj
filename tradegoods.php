@@ -29,6 +29,7 @@ if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
 	<div class="container">
 		<div class="page-header">
 			<h1> Trade Goods</h1>
+
 			<!--
 			<p>Filter by Profession</p>
 			<?php

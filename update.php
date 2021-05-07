@@ -53,7 +53,7 @@ include_once "sidenav.php";
 	//read current record data
 	try{
 		//prepare select query
-		$query="SELECT a.auctionID, a.userID, a.itemID, a.quantity,u.username, i.name FROM auction a LEFT JOIN user u ON a.userID=u.userID LEFT JOIN item i ON a.itemID=i.itemID  WHERE auctionID= ? LIMIT 0,1";
+		$query="SELECT a.auctionID, a.owner, a.itemID, a.quantity, i.name FROM auction a  LEFT JOIN item i ON a.itemID=i.itemID  WHERE auctionID= ? LIMIT 0,1";
 		$stmt=$con->prepare($query);
 		//first question mark
 		$stmt->bindParam(1,$id);
@@ -62,10 +62,9 @@ include_once "sidenav.php";
 		//store retrieved to a variable
 		$row=$stmt->fetch(PDO::FETCH_ASSOC);
 		//values to fill our form
-		$userID=$row["userID"];
 		$itemID=$row["itemID"];
 		$quantity=$row["quantity"];
-        $username=$row["username"];
+        $owner=$row["owner"];
         $itemName=$row["name"];
 		
 	}

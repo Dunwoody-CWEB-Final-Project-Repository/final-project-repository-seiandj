@@ -3,7 +3,7 @@ session_start();
 include( 'config/database.php' );
 include_once "sidenav.php";
 if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
-  header( 'location:auctions.php' );
+  header( 'location:index.php' );
 } else {
   ?>
 
@@ -27,38 +27,36 @@ if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
         <div class="page-header">
             <h1>Create an Auction</h1>
         </div>
-
+		<?php
+		// Code for fecthing user full name on the bassis of username or email.
+			$username = $_SESSION[ 'userlogin' ];
+			$query = $con->prepare( "SELECT username FROM user WHERE (username=:username || email=:username)" );
+			$query->execute( array( ':username' => $username ) );
+			while ( $row = $query->fetch( PDO::FETCH_ASSOC ) ) {
+				$username = $row[ 'username' ];
+			}
+		?>
 		<?php
 		if($_POST){
 
 			// include database connection
 			include 'config/database.php';
 
-			
-        	// Code for fecthing user full name on the bassis of username or email.
-        	//$username = $_SESSION[ 'userlogin' ];
-        	//$query = $dbh->prepare( "SELECT  FullName FROM userdata WHERE (UserName=:username || UserEmail=:username)" );
-        	//$query->execute( array( ':username' => $username ) );
-        	//while ( $row = $query->fetch( PDO::FETCH_ASSOC ) ) {
-          	//	$username = $row[ 'FullName' ];
-			//}
-        
-
 			try{
 				
 				// insert query
-				$query = "INSERT INTO auction SET userID=:userID, itemID=:itemID, quantity=:quantity";
+				$query = "INSERT INTO auction SET owner=:owner, itemID=:itemID, quantity=:quantity";
 
 				// prepare query for execution
 				$stmt = $con->prepare($query);
 
-				$userID=htmlspecialchars(strip_tags($_POST['userID']));
+				$owner=htmlspecialchars(strip_tags($_POST['owner']));
 				$itemID=htmlspecialchars(strip_tags($_POST['itemID']));
 				$quantity=htmlspecialchars(strip_tags($_POST['quantity']));
                 //$value=htmlspecialchars(strip_tags($_POST['value']));
 
 				// bind the parameters
-				$stmt->bindParam(':userID', $userID);
+				$stmt->bindParam(':owner', $owner);
 				$stmt->bindParam(':itemID', $itemID);
 				$stmt->bindParam(':quantity', $quantity);
                 //$stmt->bindParam(':value', $value);
@@ -85,22 +83,22 @@ if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 			<table class='table table-hover table-responsive table-bordered'>
 				<tr>
-                    <!--Default to userID=1 until I can implement login and get the currently logged in user-->
 					<td>Owner</td>
-					<td><input type='text' name='userID' class='form-control' value=1 /></td>
+					<td><?php echo htmlspecialchars($username); ?></td>
+					<td><input type='hidden' name='owner' class='form-control' value=<?php echo htmlspecialchars($username); ?> /></td>
 				</tr>
 				<tr>
 					<td>Item</td>
                     <td>
 					<?php
 			        include "config/database.php";
-			        $queryProf = "SELECT itemID, name, price FROM item";
-			        $stmtProf= $con->prepare($queryProf);
-			        $stmtProf->execute();
+			        $queryItems = "SELECT itemID, name, price FROM item";
+			        $stmtItems= $con->prepare($queryItems);
+			        $stmtItems->execute();
 			
 			        echo "<select class='form-control' name='itemID'>";
 			        echo "<option>Choose Item </option>";
-			        while ($row_item = $stmtProf->fetch(PDO::FETCH_ASSOC)){
+			        while ($row_item = $stmtItems->fetch(PDO::FETCH_ASSOC)){
 				        extract($row_item);
 				        echo "<option value='{$itemID}'>{$name} (ea {$price}g)</option>";
 			        }
