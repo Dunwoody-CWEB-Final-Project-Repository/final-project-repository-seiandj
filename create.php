@@ -59,15 +59,21 @@ if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
 				$stmt->bindParam(':owner', $owner);
 				$stmt->bindParam(':itemID', $itemID);
 				$stmt->bindParam(':quantity', $quantity);
-                //$stmt->bindParam(':value', $value);
+                
 				
-
-				// Execute the query
-				if($stmt->execute()){
-					echo "<div class='alert alert-success'>Record was saved.</div>";
-				}else{
-					echo "<div class='alert alert-danger'>Unable to save record.</div>";
+				//CHECK FOR EMPTY FIELDS
+				if( empty($_POST['itemID']) || empty($_POST['quantity'])){
+					echo "Choose Item and Quantity";
 				}
+				else{
+					// Execute the query
+					if($stmt->execute()){
+						echo "<div class='alert alert-success'>Record was saved.</div>";
+					}else{
+					echo "<div class='alert alert-danger'>Unable to save record.</div>";
+					}
+				}
+				
 
 			}
 
@@ -110,10 +116,7 @@ if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
 					<td>Quantity</td>
 					<td><input type='text' name='quantity' class='form-control' /></td>
 				</tr>
-                <tr>
-					<!--<td>TotalPrice</td>
-					<td><input type='text' name='value' class='form-control' /></td>-->
-				</tr>
+                
 				<tr>
 					<td></td>
 					<td>

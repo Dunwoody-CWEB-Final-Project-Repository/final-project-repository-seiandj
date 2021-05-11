@@ -43,7 +43,7 @@ if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
 		}
 		
 		// select all data
-		$query="SELECT a.auctionID,a.owner,a.itemID,a.quantity, a.value, i.name,i.price FROM auction a  LEFT JOIN item i ON a.itemID=i.itemID ORDER by auctionID DESC ";
+		$query="SELECT a.auctionID,a.owner,a.itemID,a.quantity, i.name,i.price FROM auction a  LEFT JOIN item i ON a.itemID=i.itemID ORDER by auctionID DESC ";
 		$stmt=$con->prepare($query);
 		$stmt->execute();
 		
@@ -56,7 +56,7 @@ if ( strlen( $_SESSION[ 'userlogin' ] ) == 0 ) {
 		if ($num>0)
 		{
 			//start table
-			echo"<table class='table table-hover table-responsive table-bordered'";
+			echo"<table class='table table-hover table-responsive table-bordered '";
 			
 			echo"<tr>";
 			echo"<th>Item</th>";

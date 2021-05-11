@@ -7,7 +7,7 @@ if ( isset( $_POST[ 'signup' ] ) ) {
   $username = $_POST[ 'username' ];
   $email = $_POST[ 'email' ];
 
-  //Password hashing
+  //Password hashing and BCRYPT
   $password = $_POST[ 'password' ];
   $options = [ 'cost' => 12 ];
   $hashedpass = password_hash( $password, PASSWORD_BCRYPT, $options );
