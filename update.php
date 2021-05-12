@@ -81,7 +81,7 @@ include_once "sidenav.php";
     <table class='table table-hover table-responsive table-bordered'>
       <tr>
         <td>Owner</td>
-        <td><?php echo htmlspecialchars($username); ?></td>
+        <td><?php echo htmlspecialchars($owner); ?></td>
       </tr>
       <tr>
         <td>Item</td>
